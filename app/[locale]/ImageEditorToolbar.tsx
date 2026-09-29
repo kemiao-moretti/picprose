@@ -56,7 +56,7 @@ export const ImageEditorToolbar = ({
                 color="primary"
                 variant="flat"
                 onClick={toggleEditMode}
-                title={isDragMode ? "Finish editing and lock" : "Enter edit mode"}
+                title={isDragMode ? t('lock') : t('edit')}
                 isIconOnly={true}
                 size="sm"
               >
@@ -98,7 +98,7 @@ export const ImageEditorToolbar = ({
                   }
                 }}
                 isDisabled={!isDragMode || historyIndex <= 0}
-                title="Undo"
+                title={t('undo')}
                 isIconOnly
                 size="sm"
               >
@@ -131,7 +131,7 @@ export const ImageEditorToolbar = ({
                   }
                 }}
                 isDisabled={!isDragMode || historyIndex >= history.length - 1}
-                title="Redo"
+                title={t('redo')}
                 isIconOnly
                 size="sm"
               >
@@ -158,7 +158,7 @@ export const ImageEditorToolbar = ({
                 color="primary"
                 variant="flat"
                 onClick={handleResetLayout}
-                title="Restore default layout"
+                title={t('reset')}
                 isIconOnly
                 size="sm"
               >

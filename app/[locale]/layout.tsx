@@ -59,9 +59,13 @@ const ankeLatin = Anek_Latin({
  
 export const metadata: Metadata = {
  
-  title: " PicProse - Better Cover Image Generator Tools",
-  description: "PicProse is a better cover image generator tool for Medium, YouTube, BiliBili, Blog and more.",
+  title: "PicProse - 中文封面图片生成工具",
+  description: "PicProse 是一款用于生成博客、视频和社交媒体封面图片的中文工具。"
 };
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
 
 export default async function RootLayout({
     children,

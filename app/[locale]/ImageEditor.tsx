@@ -1,9 +1,8 @@
 "use client";
 import React, { useCallback, useEffect, useRef, useReducer } from "react";
 import "./devicon.min.css";
-import {
-  Spinner,
-} from "@nextui-org/react";
+import { Spinner } from "@nextui-org/react";
+import { useTranslations } from "next-intl";
 import { usePicprose } from "./PicproseContext";
 
 // Type definitions
@@ -38,6 +37,9 @@ export const ImageEditor = ({
   saveHistory,
   handleResetLayout
 }: ImageEditorProps) => {
+  // 获取翻译函数
+  const t = useTranslations('RightPropertyPanel');
+
   // Get configuration from Context
   const { 
     propertyInfo, 
@@ -518,7 +520,7 @@ export const ImageEditor = ({
       {backgroundType === 'image' && (
         <div className="absolute bottom-4 right-4 opacity-80">
           <div className="group-hover:flex hidden items-center">
-            <span className="text-sm text-white mx-2">Photo by</span>
+            <span className="text-sm text-white mx-2">{t('photo_by')}</span>
             <a
               href={imageInfo.profile}
               target="_blank"

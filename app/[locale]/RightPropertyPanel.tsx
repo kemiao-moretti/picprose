@@ -499,7 +499,7 @@ export const RightPropertyPanel = () => {
               <svg className="w-5 h-5 mr-2 text-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <path d="M3 3h18v18H3z" strokeWidth="2" />
               </svg>
-              <span className="text-foreground">Outline</span>
+              <span className="text-foreground">轮廓</span>
             </div>
           </div>
         </div>
