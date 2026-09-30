@@ -478,7 +478,7 @@ export const ImageEditor = ({
   }, []);
   
   return (
-    <div className="max-h-screen relative flex group rounded-3xl">
+    <div className="paper-editor-frame max-h-screen relative flex group rounded-3xl">
       <div
         ref={containerRef}
         style={{ 
@@ -490,7 +490,7 @@ export const ImageEditor = ({
           width: aspectRatio.width,
           height: aspectRatio.height,
         }}
-        className="rounded-md"
+        className="paper-editor-canvas rounded-md"
 
       >
         {/* Background */}
@@ -507,7 +507,7 @@ export const ImageEditor = ({
           pointerEvents: isDragMode ? 'none' : 'auto',
           zIndex: 1
         }}
-        className={`absolute top-0 right-0 left-0 rounded-md h-full ${blur}`}
+        className={`paper-editor-overlay absolute top-0 right-0 left-0 rounded-md h-full ${blur}`}
       >
         {/* Draggable elements */}
         {renderDraggableElements()}
@@ -518,7 +518,7 @@ export const ImageEditor = ({
 
       {/* Image author information */}
       {backgroundType === 'image' && (
-        <div className="absolute bottom-4 right-4 opacity-80">
+        <div className="paper-photo-credit absolute bottom-4 right-4 opacity-80">
           <div className="group-hover:flex hidden items-center">
             <span className="text-sm text-white mx-2">{t('photo_by')}</span>
             <a

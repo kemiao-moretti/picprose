@@ -20,7 +20,10 @@ import { users } from "./data";
 import { ImageEditor } from "./ImageEditor";
 import { ImageEditorToolbar } from "./ImageEditorToolbar";
 import { PicproseProvider } from "./PicproseContext";
-import { ComponentToImg } from "./ComponentToImg";
+import {
+  ComponentToImg,
+  type ComponentToImgHandle,
+} from "./ComponentToImg";
 
 // Define editor state types
 type EditorElements = {
@@ -53,12 +56,15 @@ export default function Home() {
   const [historyIndex, setHistoryIndex] = React.useState(0);
 
   // Add reference to ComponentToImg
-  const componentToImgRef = React.useRef<{ downloadImage: (format: string) => void } | null>(null);
+  const componentToImgRef = React.useRef<ComponentToImgHandle | null>(null);
   
   // Modify image download method
   const handleDownload = (format: string) => {
-    // Call ComponentToImg download method
-    if (componentToImgRef.current) {
+    if (!componentToImgRef.current) {
+      return;
+    }
+
+    if (format === "jpg" || format === "png" || format === "svg") {
       componentToImgRef.current.downloadImage(format);
     }
   };
@@ -85,15 +91,15 @@ export default function Home() {
 
   return (
     <PicproseProvider onDownload={handleDownload}>
-      <div className="flex flex-col lg:flex-row h-screen max-h-screen">
+      <div className="paper-app paper-theme flex flex-col lg:flex-row h-screen max-h-screen">
         {/* Left panel - fixed width 350px */}
-        <div className="lg:w-[350px] flex-shrink-0 h-screen overflow-hidden">
+        <div className="paper-panel paper-left-rail lg:w-[350px] flex-shrink-0 h-screen overflow-hidden">
           <LeftResourcePanel />
         </div>
         
         {/* Middle content area - adaptive fill remaining space */}
-        <div className="flex-grow flex flex-col bg-white dark:bg-gray-900 h-screen max-h-screen overflow-hidden relative">
-          <div className="flex-1 flex justify-center items-center bg-gray-100 dark:bg-gray-800">
+        <div className="paper-workspace flex-grow flex flex-col h-screen max-h-screen overflow-hidden relative">
+          <div className="paper-canvas-stage flex-1 flex justify-center items-center">
             <ComponentToImg ref={componentToImgRef}>
               <ImageEditor 
                 isDragMode={isDragMode}
@@ -118,7 +124,7 @@ export default function Home() {
         </div>
         
         {/* Right panel - fixed width 350px */}
-        <div className="lg:w-[350px] flex-shrink-0 h-screen overflow-hidden">
+        <div className="paper-panel paper-right-rail lg:w-[350px] flex-shrink-0 h-screen overflow-hidden">
           <RightPropertyPanel />
         </div>
       </div>

@@ -35,11 +35,11 @@ export const ImageEditorToolbar = ({
   };
 
   return (
-    <div className="absolute top-24 left-1/2 transform -translate-x-1/2 z-30">
+    <div className="paper-editor-toolbar absolute top-24 left-1/2 transform -translate-x-1/2 z-30">
       <div className="flex flex-col items-center relative">
         {/* Drag mode hint - moved from ImageEditor */}
         {isDragMode && (
-          <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-white/80 text-black px-4 py-2 rounded-lg shadow-lg whitespace-nowrap">
+          <div className="paper-toolbar-hint absolute -top-12 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded-lg whitespace-nowrap">
             {t('drag_mode_hint', {
               elements: backgroundType === 'image' 
                 ? t('image_title_author_icon') 
@@ -48,21 +48,21 @@ export const ImageEditorToolbar = ({
           </div>
         )}
         
-        <div className="flex items-center rounded-lg bg-primary/10 backdrop-blur-sm px-3 py-2 shadow-lg">
+        <div className="flex items-center px-3 py-2">
           <div className="flex items-center gap-4">
             {/* Drag mode toggle button - using pen/lock icon */}
             <div className="flex flex-col items-center">
-              <Button 
-                color="primary"
+              <Button
                 variant="flat"
                 onClick={toggleEditMode}
                 title={isDragMode ? t('lock') : t('edit')}
                 isIconOnly={true}
+                className="paper-toolbar-button"
                 size="sm"
               >
-                <svg 
-                  className="w-4 h-4 text-[#2F6EE7]" 
-                  fill="none" 
+                <svg
+                  className="paper-toolbar-icon w-4 h-4"
+                  fill="none"
                   stroke="currentColor" 
                   viewBox="0 0 24 24" 
                   xmlns="http://www.w3.org/2000/svg"
@@ -89,7 +89,6 @@ export const ImageEditorToolbar = ({
             {/* Undo button - circular curved arrow style */}
             <div className="flex flex-col items-center">
               <Button 
-                color="primary"
                 variant="flat"
                 onClick={() => {
                   if (isDragMode && historyIndex > 0) {
@@ -100,9 +99,10 @@ export const ImageEditorToolbar = ({
                 isDisabled={!isDragMode || historyIndex <= 0}
                 title={t('undo')}
                 isIconOnly
+                className="paper-toolbar-button"
                 size="sm"
               >
-                <svg className="w-4 h-4 text-[#2F6EE7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="paper-toolbar-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path 
                     strokeLinecap="round" 
                     strokeLinejoin="round" 
@@ -122,7 +122,6 @@ export const ImageEditorToolbar = ({
             {/* Redo button - circular curved arrow style */}
             <div className="flex flex-col items-center">
               <Button 
-                color="primary"
                 variant="flat"
                 onClick={() => {
                   if (isDragMode && historyIndex < history.length - 1) {
@@ -133,9 +132,10 @@ export const ImageEditorToolbar = ({
                 isDisabled={!isDragMode || historyIndex >= history.length - 1}
                 title={t('redo')}
                 isIconOnly
+                className="paper-toolbar-button"
                 size="sm"
               >
-                <svg className="w-4 h-4 text-[#2F6EE7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="paper-toolbar-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path 
                     strokeLinecap="round" 
                     strokeLinejoin="round" 
@@ -155,15 +155,15 @@ export const ImageEditorToolbar = ({
             {/* Reset layout button */}
             <div className="flex flex-col items-center">
               <Button 
-                color="primary"
                 variant="flat"
                 onClick={handleResetLayout}
                 title={t('reset')}
                 isIconOnly
+                className="paper-toolbar-button"
                 size="sm"
               >
                 <svg
-                  className="w-4 h-4 text-[#2F6EE7]"
+                  className="paper-toolbar-icon w-4 h-4"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"

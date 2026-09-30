@@ -106,7 +106,9 @@ picprose/
 
 项目通过 GitHub Actions 构建并使用 Wrangler Direct Upload 部署到 Cloudflare Pages，不使用 Cloudflare Pages 的 Git 集成。
 
-首次部署前，在 Cloudflare 中创建一个 Pages 项目，例如 `picprose`。也可以使用 Wrangler 创建：
+首次部署时，GitHub Actions 会检查 Pages 项目是否存在：不存在时自动创建，存在时复用。项目名由 `CLOUDFLARE_PAGES_PROJECT_NAME` 决定，生产分支固定为 `main`。
+
+也可以手动预创建项目：
 
 ```bash
 npx wrangler pages project create picprose --production-branch=main

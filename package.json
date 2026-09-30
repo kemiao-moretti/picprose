@@ -3,14 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node scripts/next-dev.mjs",
     "build": "next build",
     "start": "npm run preview:pages",
     "preview:pages": "wrangler pages dev out",
     "lint": "next lint",
-    "test": "npm run verify:cloudflare",
+    "test": "npm run verify:cloudflare && npm run verify:paper-studio && npm run verify:types && npm run verify:next-dev",
     "verify:cloudflare": "node scripts/verify-cloudflare-pages.mjs",
-    "smoke:pages": "node scripts/smoke-cloudflare-pages.mjs"
+    "smoke:pages": "node scripts/smoke-cloudflare-pages.mjs",
+    "verify:paper-studio": "node scripts/verify-paper-studio.mjs",
+    "verify:types": "tsc --noEmit",
+    "prebuild": "node scripts/clean-next-dev-api.mjs",
+    "verify:next-dev": "node scripts/verify-next-dev-api.mjs"
   },
   "dependencies": {
     "@next/third-parties": "15.5.23",

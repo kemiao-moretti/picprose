@@ -21,7 +21,10 @@ const functionSource = read("functions/api/unsplash.ts");
 const smokeTest = read("scripts/smoke-cloudflare-pages.mjs");
 const workflow = read(".github/workflows/cloudflare-pages.yml");
 
-assert(nextConfig.includes("output: 'export'"), "next.config.mjs must enable static export");
+assert(
+  nextConfig.includes("output:") && nextConfig.includes("'export'") && nextConfig.includes("NODE_ENV"),
+  "next.config.mjs must enable static export for production while keeping dev dynamic",
+);
 assert(
   layout.includes("generateStaticParams"),
   "the locale layout must define generateStaticParams for static export",
@@ -43,6 +46,9 @@ assert(
   workflow.includes("cloudflare/wrangler-action@v4"),
   "workflow must use the Cloudflare Wrangler action",
 );
+assert(workflow.includes("pages project list --json"), "workflow must check whether the Pages project exists");
+assert(workflow.includes("pages project create"), "workflow must create a missing Pages project");
+assert(workflow.includes("--production-branch=main"), "workflow must create the Pages project with main as production branch");
 assert(workflow.includes("pages secret put UNSPLASH_API_KEY"), "workflow must configure the Pages runtime secret");
 assert(workflow.includes("pages deploy out"), "workflow must deploy the out directory");
 assert(

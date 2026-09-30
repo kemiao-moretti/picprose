@@ -16,7 +16,6 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       fontFamily: {
-        // 👇 Add CSS variables
         sans: ["var(--font-opensans)"],
         mono: ["var(--font-roboto-mono)"],
         anke: ["var(--font-anke)"],

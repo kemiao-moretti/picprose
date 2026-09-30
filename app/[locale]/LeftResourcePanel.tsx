@@ -23,6 +23,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import {useTranslations} from 'next-intl';
 import { usePicprose } from "./PicproseContext";
 import { SVG_BACKGROUNDS } from './svgBackgrounds';
+import { ThemeToggle } from './ThemeToggle';
 
 // Add SVG template type definition
 interface SvgTemplate {
@@ -1068,10 +1069,11 @@ export const LeftResourcePanel = () => {
   );
 
   return (
-    <div className="w-full flex flex-col h-screen">
+    <div className="paper-resource-panel w-full flex flex-col h-screen">
       <div className="w-full flex-none">
         <Navbar
           classNames={{
+            base: "paper-navbar",
             wrapper: "px-4",
           }}
         >
@@ -1080,6 +1082,9 @@ export const LeftResourcePanel = () => {
             <p className="font-bold text-inherit">PicProse</p>
           </NavbarBrand>
           <NavbarContent justify="end">
+            <NavbarItem>
+              <ThemeToggle />
+            </NavbarItem>
             <NavbarItem>
               <Avatar
                 isBordered
@@ -1092,6 +1097,7 @@ export const LeftResourcePanel = () => {
       
       <div className="px-2 pt-2 flex-grow flex flex-col">
         <Tabs 
+          className="paper-tabs"
           selectedKey={activeTab} 
           onSelectionChange={(key) => handleTabChange(key as string)}
           color="default"
@@ -1143,6 +1149,7 @@ export const LeftResourcePanel = () => {
       <div className="w-full flex-none mt-auto">
         <Navbar
           classNames={{
+            base: "paper-navbar",
             wrapper: "px-4",
           }}
         >
@@ -1153,6 +1160,7 @@ export const LeftResourcePanel = () => {
             ref={fileInputRef}
           />
           <Button
+            className="paper-icon-button"
             variant="flat"
             color="primary"
             isIconOnly
@@ -1177,6 +1185,7 @@ export const LeftResourcePanel = () => {
             </svg>
           </Button>
           <Input
+            className="paper-search-bar"
             type="search"
             placeholder={t('input_search')}
             value={searchQuery}
@@ -1188,6 +1197,7 @@ export const LeftResourcePanel = () => {
           <NavbarContent justify="end">
             <NavbarItem>
               <Button
+                className="paper-icon-button"
                 isIconOnly
                 variant="flat"
                 color="primary"

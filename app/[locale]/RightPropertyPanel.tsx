@@ -474,7 +474,7 @@ export const RightPropertyPanel = () => {
         {/* 随机生成按钮 */}
         <Button 
           color="primary" 
-          className="w-full mb-6"
+          className="paper-export-button w-full mb-6"
           onClick={() => randomizeHeazyWave()}
         >
           {t("randomize_wave")}
@@ -757,7 +757,7 @@ export const RightPropertyPanel = () => {
                     </div>
                   </DropdownTrigger>
                   <DropdownMenu>
-                    <DropdownItem>
+                    <DropdownItem key="start-color">
                       <TwitterPicker 
                         color={params?.color1 || currentSvg.defaultParams.color1}
                         onChangeComplete={(color) => handleSvgParamChange('color1', color.hex)}
@@ -784,7 +784,7 @@ export const RightPropertyPanel = () => {
                     </div>
                   </DropdownTrigger>
                   <DropdownMenu>
-                    <DropdownItem>
+                    <DropdownItem key="end-color">
                       <TwitterPicker 
                         color={params?.color2 || currentSvg.defaultParams.color2}
                         onChangeComplete={(color) => handleSvgParamChange('color2', color.hex)}
@@ -815,7 +815,7 @@ export const RightPropertyPanel = () => {
                     </div>
                   </DropdownTrigger>
                   <DropdownMenu>
-                    <DropdownItem>
+                    <DropdownItem key="background-color">
                       <TwitterPicker 
                         color={params?.backgroundColor || '#001220'}
                         onChangeComplete={(color) => handleSvgParamChange('backgroundColor', color.hex)}
@@ -877,7 +877,7 @@ export const RightPropertyPanel = () => {
   };
 
   return (
-    <div className="w-full flex flex-col h-screen max-w-md mx-auto relative overflow-hidden">
+    <div className="paper-property-panel w-full flex flex-col h-screen max-w-md mx-auto relative overflow-hidden">
       {/* 原始面板内容 */}
       <div 
         className={`absolute inset-0 flex flex-col w-full h-full transition-transform duration-300 ${
@@ -887,6 +887,7 @@ export const RightPropertyPanel = () => {
         <div className="w-full">
           <Navbar
             classNames={{
+              base: "paper-navbar",
               wrapper: "px-4",
             }}
           >
@@ -899,6 +900,7 @@ export const RightPropertyPanel = () => {
             <NavbarContent justify="end">
               <NavbarItem>
                 <Button
+                  className="paper-github-button"
                   as={Link}
                   color="primary"
                   variant="flat"
@@ -915,11 +917,11 @@ export const RightPropertyPanel = () => {
           </Navbar>
         </div>
         
-        <div className="flex-grow overflow-y-auto overflow-x-hidden flex flex-col px-4">
+        <div className="paper-property-scroll flex-grow overflow-y-auto overflow-x-hidden flex flex-col px-4">
           <div className="w-full py-2">
             <p className="text-sm text-gray-500 mb-1">{t("aspect")}</p>
             <div 
-              className="rounded-lg bg-default-100 dark:bg-default-50 p-4 flex justify-between items-center cursor-pointer border border-default-200"
+              className="paper-dimensions-card rounded-lg bg-default-100 dark:bg-default-50 p-4 flex justify-between items-center cursor-pointer border border-default-200"
               onClick={() => setShowDimensionsModal(true)}
             >
               <div>
@@ -950,6 +952,7 @@ export const RightPropertyPanel = () => {
               <Dropdown>
                 <DropdownTrigger>
                   <Button
+                    className="paper-icon-button"
                     isIconOnly
                     color="primary"
                     variant="bordered"
@@ -1026,9 +1029,9 @@ export const RightPropertyPanel = () => {
                 defaultSelectedKeys={["aarch64-plain"]}
                 renderValue={(items) => {
                   return items.map((item) => (
-                    <div key={item.key} className="flex gap-2 items-center">
+                    <div key={String(item.key)} className="flex gap-2 items-center">
                       <i
-                        className={`devicon-${item.key} text-black dev-icon text-base`}
+                        className={`devicon-${String(item.key)} text-black dev-icon text-base`}
                       ></i>
                       <div className="flex flex-col">{item.data?.name}</div>
                     </div>
@@ -1058,6 +1061,7 @@ export const RightPropertyPanel = () => {
                 ref={iconInputRef}
               />
               <Button
+                className="paper-icon-button"
                 isIconOnly
                 color="primary"
                 variant="flat"
@@ -1108,6 +1112,7 @@ export const RightPropertyPanel = () => {
                 ref={fontInputRef}
               />
               <Button
+                className="paper-icon-button"
                 isIconOnly
                 color="primary"
                 variant="flat"
@@ -1191,6 +1196,7 @@ export const RightPropertyPanel = () => {
           <div className="text-gray-400 text-sm">{t("download")}</div>
           <div className="flex justify-between my-3">
             <Button
+              className="paper-export-button"
               onClick={() => handleImageDownload("jpg")}
               as={Link}
               color="primary"
@@ -1199,6 +1205,7 @@ export const RightPropertyPanel = () => {
               JPG
             </Button>
             <Button
+              className="paper-export-button"
               onClick={() => handleImageDownload("png")}
               as={Link}
               color="primary"
@@ -1207,6 +1214,7 @@ export const RightPropertyPanel = () => {
               PNG
             </Button>
             <Button
+              className="paper-export-button"
               onClick={() => handleImageDownload("svg")}
               as={Link}
               color="primary"
@@ -1225,7 +1233,7 @@ export const RightPropertyPanel = () => {
         }`}
       >
         <div className="w-full">
-          <Navbar classNames={{ wrapper: "px-4" }}>
+          <Navbar classNames={{ base: "paper-navbar", wrapper: "px-4" }}>
             <NavbarBrand>
               <Button 
                 isIconOnly
@@ -1244,7 +1252,7 @@ export const RightPropertyPanel = () => {
           </Navbar>
         </div>
         
-        <div className="flex-grow overflow-y-auto overflow-x-hidden flex flex-col px-4">
+        <div className="paper-dimensions-scroll flex-grow overflow-y-auto overflow-x-hidden flex flex-col px-4">
           <div className="grid grid-cols-1 gap-2 py-2">
             <p className="text-sm font-medium text-gray-500">{t("custom_resolution") || "自定义分辨率"}</p>
             <div className="p-3 rounded-md bg-gray-100 dark:bg-gray-800">
@@ -1425,6 +1433,7 @@ export const RightPropertyPanel = () => {
         <div className="w-full">
           <Navbar
             classNames={{
+              base: "paper-navbar",
               wrapper: "px-4",
             }}
           >
@@ -1444,7 +1453,7 @@ export const RightPropertyPanel = () => {
           </Navbar>
         </div>
         
-        <div className="flex-grow overflow-y-auto px-4">
+        <div className="paper-svg-scroll flex-grow overflow-y-auto px-4">
           {renderSvgControls()}
         </div>
       </div>

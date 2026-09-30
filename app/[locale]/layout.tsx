@@ -10,6 +10,20 @@ import {getMessages, setRequestLocale} from 'next-intl/server';
 import {hasLocale} from 'next-intl';
 import {notFound} from 'next/navigation';
 import {routing} from '../../routing';
+
+const themeInitScript = `(() => {
+  try {
+    const stored = localStorage.getItem('picprose-theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme = stored === 'dark' || stored === 'light' ? stored : (prefersDark ? 'dark' : 'light');
+    const root = document.documentElement;
+    root.classList.toggle('dark', theme === 'dark');
+    root.classList.toggle('light', theme === 'light');
+    root.dataset.theme = theme;
+    root.style.colorScheme = theme;
+  } catch {}
+})()`;
+
 // Font files can be colocated inside of `app`
 const dingTalkFont = localFont({
   src: 'fonts/DingTalk JinBuTi.ttf',
@@ -82,7 +96,7 @@ export default async function RootLayout({
   setRequestLocale(locale);
   const messages = await getMessages();
   return (
-    <html lang={locale} className={`${openSans.variable} ${robotoMono.variable} ${ankeLatin.variable} ${dingTalkFont.variable} ${kingsoftFont.variable} ${xinYiGuanHeiFont.variable} ${alibabaFont.variable} font-sans light`}>
+    <html lang={locale} suppressHydrationWarning className={`${openSans.variable} ${robotoMono.variable} ${ankeLatin.variable} ${dingTalkFont.variable} ${kingsoftFont.variable} ${xinYiGuanHeiFont.variable} ${alibabaFont.variable} font-sans`}>
       <head>
         <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png"/>
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png"/>
@@ -90,7 +104,8 @@ export default async function RootLayout({
         <link rel="manifest" href="/favicon/site.webmanifest"/>
         <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5"/>
         <meta name="msapplication-TileColor" content="#da532c"/>
-        <meta name="theme-color" content="#ffffff"/>
+        <meta name="theme-color" content="#faf9f6"/>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body>
       <NextIntlClientProvider messages={messages}>
