@@ -50,21 +50,18 @@ jobs:
           test -n "$CLOUDFLARE_API_TOKEN"
           test -n "$CLOUDFLARE_PAGES_PROJECT_NAME"
 
-          if ! npx wrangler pages project list --json | node -e '
-            let input = "";
-            process.stdin.on("data", chunk => { input += chunk; });
-            process.stdin.on("end", () => {
-              const projects = JSON.parse(input);
-              const exists = (projects.result || projects).some(
-                project => project.name === process.env.CLOUDFLARE_PAGES_PROJECT_NAME,
-              );
-              process.exit(exists ? 0 : 1);
-            });
-          '; then
-            echo "Creating Cloudflare Pages project: $CLOUDFLARE_PAGES_PROJECT_NAME"
-            npx wrangler pages project create "$CLOUDFLARE_PAGES_PROJECT_NAME" --production-branch=main
-          else
+          # Idempotent: attempt to create the project; treat "already exists"
+          # (code 8000002) as success rather than parsing `pages project list`,
+          # which is unreliable across wrangler versions and output shapes.
+          create_output="$(npx wrangler pages project create "$CLOUDFLARE_PAGES_PROJECT_NAME" --production-branch=main 2>&1 || true)"
+          echo "$create_output"
+          if echo "$create_output" | grep -q "A project with this name already exists"; then
             echo "Cloudflare Pages project already exists: $CLOUDFLARE_PAGES_PROJECT_NAME"
+          elif echo "$create_output" | grep -qE "(Successfully created|Creating.*project)"; then
+            echo "Created Cloudflare Pages project: $CLOUDFLARE_PAGES_PROJECT_NAME"
+          else
+            echo "Error: failed to ensure Cloudflare Pages project exists" >&2
+            exit 1
           fi
 
       - name: Configure Pages runtime secret

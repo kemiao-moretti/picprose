@@ -46,8 +46,9 @@ assert(
   workflow.includes("cloudflare/wrangler-action@v4"),
   "workflow must use the Cloudflare Wrangler action",
 );
-assert(workflow.includes("pages project list --json"), "workflow must check whether the Pages project exists");
-assert(workflow.includes("pages project create"), "workflow must create a missing Pages project");
+assert(workflow.includes("pages project create"), "workflow must attempt to create the Pages project idempotently");
+assert(workflow.includes("already exists"), "workflow must treat an existing Pages project as success");
+assert(!workflow.includes("pages project list --json"), "workflow must not rely on `pages project list` parsing");
 assert(workflow.includes("--production-branch=main"), "workflow must create the Pages project with main as production branch");
 assert(workflow.includes("pages secret put UNSPLASH_API_KEY"), "workflow must configure the Pages runtime secret");
 assert(workflow.includes("pages deploy out"), "workflow must deploy the out directory");
