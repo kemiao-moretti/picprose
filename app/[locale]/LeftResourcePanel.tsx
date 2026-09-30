@@ -306,7 +306,7 @@ const SvgPatternPanel = () => {
           <div 
             className={`w-full aspect-[4/3] rounded-md cursor-pointer hover:scale-105 transition-transform overflow-hidden ${selectedSvgIndex === 0 ? 'border-2 border-blue-500' : 'border border-gray-300 dark:border-gray-700'}`}
             onClick={() => handlePatternSelect(0)}
-            style={{ backgroundImage: 'url(waves.svg)', backgroundSize: 'cover', backgroundPosition: 'center' }}
+            style={{ backgroundImage: 'url(/waves.svg)', backgroundSize: 'cover', backgroundPosition: 'center' }}
           >
           </div>
           <div className="text-center text-default-600 mt-2">
@@ -319,7 +319,7 @@ const SvgPatternPanel = () => {
           <div 
             className={`w-full aspect-[4/3] rounded-md cursor-pointer hover:scale-105 transition-transform overflow-hidden ${selectedSvgIndex === 1 ? 'border-2 border-blue-500' : 'border border-gray-300 dark:border-gray-700'}`}
             onClick={() => handlePatternSelect(1)}
-            style={{ backgroundImage: 'url(corners.svg)', backgroundSize: 'cover', backgroundPosition: 'center' }}
+            style={{ backgroundImage: 'url(/corners.svg)', backgroundSize: 'cover', backgroundPosition: 'center' }}
           >
            
           </div>
@@ -561,7 +561,7 @@ export const LeftResourcePanel = () => {
       setImageInfo({
         url: file,
         name: "PicProse",
-        avatar: "default-author.jpg",
+        avatar: "/author.png",
         profile: "default",
         downloadLink: "",
       });
@@ -933,7 +933,7 @@ export const LeftResourcePanel = () => {
       setImageInfo({
         url: selectedPhoto.url,
         name: selectedPhoto.name || "未知作者",
-        avatar: selectedPhoto.avatar || "default-author.jpg",
+        avatar: selectedPhoto.avatar || "/author.png",
         profile: selectedPhoto.profile || "#",
         downloadLink: selectedPhoto.downloadLink || "",
         width: selectedPhoto.width,
@@ -1045,7 +1045,7 @@ export const LeftResourcePanel = () => {
             href="https://unsplash.com/?utm_source=PicProse&utm_medium=referral"
             target="_blank"
           >
-            <img className="w-20 h-4" src="./Unsplash_Logo_Full.svg" />
+            <img className="w-20 h-4" src="/Unsplash_Logo_Full.svg" />
           </a>
         </div>
       </div>
@@ -1079,7 +1079,7 @@ export const LeftResourcePanel = () => {
         >
           <NavbarBrand>
             <PicproseLogo />
-            <p className="font-bold text-inherit">PicProse</p>
+            <p className="font-bold text-inherit">克喵:)的封面设计</p>
           </NavbarBrand>
           <NavbarContent justify="end">
             <NavbarItem>
@@ -1088,7 +1088,7 @@ export const LeftResourcePanel = () => {
             <NavbarItem>
               <Avatar
                 isBordered
-                src="https://i.pravatar.cc/150?u=a04258114e29026302d"
+                src="https://q2.qlogo.cn/headimg_dl?dst_uin=3149261770&spec=0"
               />
             </NavbarItem>
           </NavbarContent>

@@ -9,7 +9,7 @@ export const config = {
     "Why UI designers should understand Flexbox and CSS Grid",
   ],
   subTitle: "",
-  author: "@PicProse",
+  author: "@克喵:)",
   font: "font-anke",
   icon: "",
   backColor: "#1F2937",
